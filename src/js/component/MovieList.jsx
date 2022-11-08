@@ -1,14 +1,16 @@
-import React from "react";
-import initialMovies from "/workspace/Context-API/src/js/component/const/InitialMovies.jsx";
+import React, {useContext} from "react";
 import Movie from "/workspace/Context-API/src/js/component/Movie.jsx";
-
+import MoviesContext from "/workspace/Context-API/src/js/component/contexts/MoviesContext.js";
 
 const MovieList = () => {
-    console.log("movie list")
+
+   const { starwars } = useContext(MoviesContext) 
+
+
     return (
         <div className="container">
             <div className="row">
-                {initialMovies.map(pelicula => ( 
+                {starwars.map(pelicula => ( 
                 <div className="col-md-4" key={pelicula.id}>
                    <Movie pelicula={pelicula}/>
                 </div>

@@ -5,7 +5,7 @@ const MoviesContext = createContext();
 
 const MoviesProvider = ({children}) => {
 
-    const data = { pelicula : initialMovies }
+    const data = { starwars : initialMovies }
     return (
         <MoviesContext.Provider value = {data}>
             {children}

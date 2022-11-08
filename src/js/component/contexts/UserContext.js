@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 
 const UserContext = createContext();
 
-const initialUser = { id:1, name:"Lucy", favoriteMovies: [1,2]}
+const initialUser = { id:1, name:"Lucy", favoriteMovies: []}
 
 const UserProvider = ({children}) => {
     const [user, setUser] = useState(initialUser)
@@ -15,7 +15,22 @@ const UserProvider = ({children}) => {
         setUser(null);
     }
 
-    const data = { user, login, logout }
+    const favoriteMovieToUser = (movieId) => {
+        const isFavorite = user.favoriteMovies.includes(movieId);
+
+        
+        const favoriteMovies = isFavorite
+        ? [user.favoriteMovies.filter(favMovId => favMovId !== movieId)]
+        : [...user.favoriteMovies, movieId]
+
+        setUser({
+            ...user,
+            favoriteMovies
+        })
+
+    }
+
+    const data = { user, login, logout, favoriteMovieToUser }
     return (
         <UserContext.Provider value={data}>
             {children}

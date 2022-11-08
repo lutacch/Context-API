@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "/workspace/Context-API/src/js/component/contexts/UserContext.js";
+
 
 
 const Movie = ({pelicula}) => {
-    console.log("movie")
+    const { user, favoriteMovieToUser } = useContext(UserContext)
+ 
     const imgStyles = {
         height:"300px",
         objectFit: "cover",
     }
 
-    const isFavorite = false;
+    const isFavorite = user?.favoriteMovies?.includes(pelicula.id);
 
     return (
         <div className="card">
@@ -19,9 +22,11 @@ const Movie = ({pelicula}) => {
              ></img> 
             <div className="card-body">
                <h4>{pelicula.title}</h4>  
-                <button className={`btn ${isFavorite ? `btn-warning` : `btn-outline-primary`}`}>Favorito</button>
+                <button className={`btn ${isFavorite ? `btn-warning` : `btn-outline-primary`}`}
+                onClick={()=>favoriteMovieToUser(pelicula.id)}
+                >
+                    Favorito</button>
             </div>
-            <h1>Movies</h1>
             </div>
     )
 }
